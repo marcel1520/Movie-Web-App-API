@@ -1,23 +1,36 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h2>All Users</h2>
-        <ul>
-            {% for user in users %}
-                <li>
-                    <a href="{{ url_for('user_movies', user_id=user.id) }}">{{ user.name }}</a>
-                    <form action="{{ url_for('delete_user', user_id=user.id) }}" method="POST" style="display:inline">
-                        <button type="submit">Delete</button>
-                    </form>
-                </li>
-            {% endfor %}
-        </ul>
+    <div class="start-page">
+        <div class="user-handling">
+            <h2 style="font-size: 40px; text-align: center;">All Users</h2>
+                <ul>
+                    {% for user in users %}
+                        <li>
+                            <a href="{{ url_for('user_movies', user_id=user.id) }} " style="font-size: 25px;">{{ user.name }}</a>
+                            <form action="{{ url_for('delete_user', user_id=user.id) }}" method="POST" style="display:inline">
+                                <br>
+                                <button type="submit">Delete</button><br><br>
+                            </form>
+                        </li>
+                    {% endfor %}
+                </ul>
 
-    <h3>Add New User</h3>
-    <form method="POST">
-        <input name="name" placeholder="User name">
-        <button type="submit">Add User</button>
-    </form>
-
-
+            <h3 style="font-size: 30px; text-align: center;">Add New User</h3>
+            <div class="form-container">
+                <form method="POST">
+                    <input name="name" placeholder="User name">
+                    <button type="submit">Add User</button>
+                </form>
+            </div>
+        </div>
+        <div class="slideshow-container">
+            <div class="picture">
+                <img src="../static/cinema-front.jpg" alt="cinema">
+                <!--<img src="../static/cinema-front1.jpg" alt="cinema">
+                <img src="../static/projector.jpg" alt="cinema">
+                <img src="../static/projector1.jpg" alt="cinema">-->
+            </div>
+        </div>
+    </div>
 {% endblock %}

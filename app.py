@@ -17,6 +17,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 data_manager = SQLiteDataManager(app)
 
 
+@app.route('/')
 @app.route('/users', methods=['GET', 'POST'])
 def users():
     if request.method == 'GET':

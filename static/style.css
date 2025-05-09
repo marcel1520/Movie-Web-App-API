@@ -70,3 +70,34 @@ footer {
     font-size: 1.2em;
     margin: 10px;
 }
+
+.start-page{
+    display: flex;
+    gap: 200px;
+}
+
+.user-handling {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.picture img{
+    width: 550px;
+    height: auto;
+    margin: 60px 0 0 20px;
+    border-radius: 7px;
+}
+
+.form-container{
+    display: flex;
+    justify-content: center;
+}
+
+.form-container form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
