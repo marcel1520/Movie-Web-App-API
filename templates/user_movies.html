@@ -3,17 +3,24 @@
 {% block content %}
 <h2>{{ user.name }}'s Movies</h2>
 
-<ul>
+<ul class="movie-list">
     {% for movie in movies %}
-        <li>
+        <li class="movie-item">
             {% if movie.poster_url %}
-                <img src="{{ movie.poster_url }}" alt="Poster" style="height: 300px">
+            <div class="movie-info">
+                <img src="{{ movie.poster_url }}" alt="Poster" style="height: 500px">
             {% endif %}
-                <strong>{{ movie.title }}</strong> ({{ movie.release_year }}) - {{ movie.genre }} - {{ movie.director }} - {{ movie.rating }}
-    
+                <div class="info">
+                    <strong style="font-size: 30px;">{{ movie.title }}</strong>
+                    <span>({{ movie.release_year }})</span>
+                    <span>{{ movie.genre }}</span>
+                    <span>{{ movie.director }}</span>
+                    <span>{{ movie.rating }}</span>
+                </div>
                 <form action="{{ url_for('delete_movie', user_id=user.id, movie_id=movie.id) }}" method="POST" style="display:inline">
                     <button type="submit">Delete</button>
                 </form>
+            </div>
         </li>
     {% endfor %}
 </ul>

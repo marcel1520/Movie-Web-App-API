@@ -33,14 +33,18 @@ def users():
 def user_movies(user_id):
     if request.method == 'POST':
         title = request.form.get('title')
-        if title:
+        if not title:
+            flash("Provide title", "Warning")
+            return redirect(url_for('user_movies', user_id=user_id))
+        try:
             movie_data = fetch_movie_info(title)
             if movie_data:
                 data_manager.add_movie(user_id, movie_data)
             else:
                 flash("Movie not found", "Error")
-        else:
-            flash("Provide title", "Warning")
+        except KeyError as k:
+            flash("No Movie found, check spelling", "Error")
+
         return redirect(url_for('user_movies', user_id=user_id))
 
     user = data_manager.get_user(user_id)
