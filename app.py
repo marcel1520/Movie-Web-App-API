@@ -20,6 +20,16 @@ data_manager = SQLiteDataManager(app)
 @app.route('/')
 @app.route('/users', methods=['GET', 'POST'])
 def users():
+    """
+        Handles displaying all users and adding a new user.
+        GET:
+            - Retrieves all users from the database and renders them in the 'users.html' template.
+        POST:
+            - Adds a new user with the provided name from the form.
+            - Redirects back to the users page after adding.
+        Returns:
+            Rendered HTML template or redirect response.
+        """
     if request.method == 'GET':
         db_users = data_manager.get_all_users()
         return render_template('users.html', users=db_users)
@@ -32,6 +42,19 @@ def users():
 
 @app.route('/users/<int:user_id>/movies', methods=['GET', 'POST'])
 def user_movies(user_id):
+    """
+        Displays and manages a user's movie collection.
+        GET:
+            - Fetches and displays all movies for the specified user.
+        POST:
+            - Fetches movie data by title using an external API.
+            - Adds the movie to the user's collection if found.
+            - Displays appropriate flash messages for errors or warnings.
+        Args:
+            user_id (int): The ID of the user whose movies are being managed.
+        Returns:
+            Rendered HTML template or redirect response.
+        """
     if request.method == 'POST':
         title = request.form.get('title')
         if not title:
@@ -55,12 +78,27 @@ def user_movies(user_id):
 
 @app.route('/users/<int:user_id>/movies/<int:movie_id>/delete', methods=['POST'])
 def delete_movie(user_id, movie_id):
+    """
+        Deletes a movie from a user's collection.
+        Args:
+            user_id (int): The ID of the user.
+            movie_id (int): The ID of the movie to delete.
+        Returns:
+            Redirects to the user's movie page.
+        """
     data_manager.delete_movie(user_id, movie_id)
     return redirect(url_for('user_movies', user_id=user_id))
 
 
 @app.route('/users/<int:user_id>/delete', methods=['POST'])
 def delete_user(user_id):
+    """
+        Deletes a user and all associated data.
+        Args:
+            user_id (int): The ID of the user to delete.
+        Returns:
+            Redirects to the users listing page.
+        """
     data_manager.delete_user(user_id)
     return redirect(url_for('users'))
 
