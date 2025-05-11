@@ -14,7 +14,8 @@ def serialize_data(data):
         'genre': data['Genre'],
         'director': data['Director'],
         'rating': data['imdbRating'],
-        'poster_url': data['Poster']
+        'poster_url': data['Poster'],
+        'plot': data['Plot']
     }
     return movie_data
 

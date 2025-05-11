@@ -10,9 +10,10 @@ class User(db.Model):
 class Movie(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     title = db.Column(db.String(150))
-    release_year = db.Column(db.Integer)
+    release_year = db.Column(db.String(10))
     genre = db.Column(db.String(100))
     director = db.Column(db.String(100))
-    rating = db.Column(db.Float)
+    rating = db.Column(db.String(10))
     poster_url = db.Column(db.String(300))
+    plot = db.Column(db.String(1000))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
