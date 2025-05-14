@@ -18,6 +18,10 @@ data_manager = SQLiteDataManager(app)
 
 
 @app.route('/')
+def home():
+    return redirect(url_for('users'))
+
+
 @app.route('/users', methods=['GET', 'POST'])
 def users():
     """
